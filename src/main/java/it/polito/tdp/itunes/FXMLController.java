@@ -5,7 +5,10 @@
 package it.polito.tdp.itunes;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+
 import it.polito.tdp.itunes.model.Album;
 import it.polito.tdp.itunes.model.Model;
 import javafx.event.ActionEvent;
@@ -35,10 +38,10 @@ public class FXMLController {
     private Button btnPercorso; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbA1"
-    private ComboBox<?> cmbA1; // Value injected by FXMLLoader
+    private ComboBox<Album> cmbA1; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbA2"
-    private ComboBox<?> cmbA2; // Value injected by FXMLLoader
+    private ComboBox<Album> cmbA2; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtN"
     private TextField txtN; // Value injected by FXMLLoader
@@ -52,6 +55,11 @@ public class FXMLController {
     @FXML
     void doCalcolaAdiacenze(ActionEvent event) {
     	
+    	Album a = cmbA1.getValue();
+    	
+    	
+    	txtResult.appendText(model.getAdiacenze(a) +"\n");
+    	
     }
 
     @FXML
@@ -62,6 +70,28 @@ public class FXMLController {
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	
+    	int n = 0;
+    	
+    	try {
+    		n = Integer.parseInt( this.txtN.getText() );
+    		
+    	}catch(NumberFormatException e) {
+    		txtResult.setText("Inserire N valido");
+    		return;
+    	}
+    	if (n<=0) {
+    		txtResult.setText("n deve essere un numero positivo.");
+    		return;
+    	}
+    	
+    	
+    	this.model.creaGrafo(n);
+    	List<Album> vertici = this.model.getVertici();
+    	this.txtResult.setText("Grafo creato.\n");
+    	this.txtResult.appendText("Ci sono " + this.model.nVertici() + " vertici\n");
+    	this.txtResult.appendText("Ci sono " + this.model.nArchi() + " archi\n\n");
+    	
+    	this.cmbA1.getItems().addAll(vertici);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

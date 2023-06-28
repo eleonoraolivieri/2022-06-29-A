@@ -1,3 +1,22 @@
-.button {
-    -fx-font-weight: bold;
+*{
+	-fx-font-size: 11pt;
+	-fx-font-family: "Arial";
+}
+.combo-box .popup-menu, .combo-box .menu-item, .combo-box .popup-menu .menu-item-radio
+    {
+        -fx-shadow-highlight-color: transparent;
+         -fx-font-family: "Arial";
+         -fx-font-size: 14px;
+    }
+    
+
+.combo-box .cell  .combo-box-popup .list-view .list-cell .text{
+    -fx-text-fill: blue;	
+    -fx-font-family: "Arial";
+}
+.customcell {
+    -fx-text-fill: blue;
+    -fx-font: 16px "Arial";
+    /* No alternate highlighting */
+    -fx-background-color: #FFF;
 }
